@@ -1,0 +1,6 @@
+type: TrafficTrace
+name: tt-1
+mesh: default
+selectors:
+- match:
+    kuma.io/service: '*' 

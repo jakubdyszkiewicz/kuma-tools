@@ -1,0 +1,10 @@
+type: ExternalService
+mesh: default
+name: time
+tags:
+  kuma.io/service: time
+  kuma.io/protocol: http
+networking:
+  address: 2wtyubu9i2.execute-api.us-east-1.amazonaws.com:443
+  tls:
+    enabled: true

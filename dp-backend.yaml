@@ -1,0 +1,20 @@
+type: Dataplane
+mesh: default
+name: backend-01
+networking:
+  address: 192.168.0.13
+  inbound:
+  - port: 21011
+    servicePort: 21012
+    tags:
+      kuma.io/service: backend
+      kuma.io/zone: test
+      kuma.io/region: waitwhat
+      version: "2.0"
+      kuma.io/protocol: http
+  - port: 21022
+    servicePort: 21033
+    address: 192.168.0.13
+    tags:
+      kuma.io/service: backend-api
+      kuma.io/protocol: http

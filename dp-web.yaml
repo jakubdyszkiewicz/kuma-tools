@@ -1,0 +1,29 @@
+type: Dataplane
+mesh: default
+name: web-01
+networking:
+  address: 192.168.0.13
+  gateway:
+    tags:
+      kuma.io/service: web
+      version: v1
+  outbound:
+  - port: 33033
+    tags:
+      kuma.io/service: backend
+  # - port: 33034
+  #   tags:
+  #     kuma.io/service: backend-api
+  - port: 33035
+    tags:
+      kuma.io/service: time
+  - port: 33036
+    tags:
+      kuma.io/service: testmtls
+metrics:
+  type: prometheus
+  conf:
+    skipMTLS: true
+    port: 5670
+    path: /metrics
+

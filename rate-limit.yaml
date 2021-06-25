@@ -1,0 +1,18 @@
+type: RateLimit
+mesh: default
+name: rate-limit-all-sources
+sources:
+- match:
+   kuma.io/service: "*"
+destinations:
+- match:
+   kuma.io/service: '*'
+conf:
+  http:
+    requests: 2
+    interval: 5s
+    onRateLimit:
+      status: 423
+      headers:
+        - key: "x-kuma-rate-limited"
+          value: "true"

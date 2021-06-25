@@ -1,0 +1,45 @@
+mtls:
+  enabledBackend: builtin-ca
+  backends:
+  - name: builtin-ca
+    type: builtin
+  - name: provided-ca
+    type: provided
+    conf:
+      cert:
+        file: /Users/jakob/Downloads/certs-test/ca/certs/ca.cert.pem
+      key:
+        file: /Users/jakob/Downloads/certs-test/ca/private/ca.key.pem
+tracing:
+  defaultBackend: zipkin
+  backends:
+  - name: zipkin
+    type: zipkin
+    conf:
+      url: http://localhost:9411/api/v2/spans
+logging:
+  # TrafficLog policies may leave the `backend` field undefined.
+  # In that case the logs will be forwarded into the `defaultBackend` of that Mesh.
+  defaultBackend: file
+  # List of logging backends that can be referred to by name
+  # from TrafficLog policies of that Mesh.
+  backends:
+    - name: file
+      type: file
+      # Use `config` field to configure a file-based logging backend.
+      conf:
+        path: /tmp/access.log
+      # When `format` field is omitted, the default access log format will be used.
+    - name: tcp
+      type: tcp
+      conf:
+        address: 127.0.0.1:8475
+metrics:
+#  enabledBackend: prom-1
+  backends:
+  - name: prom-1
+    type: prometheus
+#routing:
+#  localityAwareLoadBalancing: true
+name: default
+type: Mesh
